@@ -1,0 +1,84 @@
+SQL*Plus: Release 10.2.0.1.0 - Production on Mon Apr 7 11:31:59 2025
+
+Copyright (c) 1982, 2005, Oracle.  All rights reserved.
+
+SQL> conn
+Enter user-name: system
+Enter password:
+Connected.
+SQL> SET SERVEROUTPUT ON
+SQL> SET VERIFY ON
+
+1.
+SQL> BEGIN
+  2  FOR I IN 1..5 LOOP
+  3  DBMS_OUTPUT.PUT_LINE('SOUVIK');
+  4  END LOOP;
+  5  END;
+  6  /
+SOUVIK
+SOUVIK
+SOUVIK
+SOUVIK
+SOUVIK
+
+PL/SQL procedure successfully completed.
+
+2.
+SQL> DECLARE
+  2  NUM NUMBER := 12345;
+  3  REV NUMBER := 0;
+  4  REMAINDER NUMBER;
+  5  BEGIN
+  6  WHILE NUM > 0 LOOP
+  7  REMAINDER := MOD(NUM, 10);
+  8  REV := (REV * 10) + REMAINDER;
+  9  NUM := TRUNC (NUM/10);
+ 10  END LOOP;
+ 11  DBMS_OUTPUT.PUT_LINE('REVERSE: '||REV);
+ 12  END;
+ 13  /
+REVERSE: 54321
+
+PL/SQL procedure successfully completed.
+
+SQL> CREATE TABLE AREA( RADIUS NUMBER, AREAA NUMBER );
+
+Table created.
+
+SQL> DECLARE
+  2  R NUMBER;
+  3  A NUMBER;
+  4  BEGIN
+  5  FOR R IN 3..7 LOOP
+  6  A:= 3.14 * R * R;
+  7  INSERT INTO AREA VALUES (R,A);
+  8  END LOOP;
+  9  COMMIT;
+ 10  END;
+ 11  /
+
+PL/SQL procedure successfully completed.
+
+3.
+SQL> SELECT * FROM AREA;
+
+    RADIUS      AREAA
+---------- ----------
+         3      28.26
+         4      50.24
+         5       78.5
+         6     113.04
+         7     153.86
+
+6.
+SQL> BEGIN
+  2  UPDATE emp
+  3  SET SAL = SAL + (SAL * 0.08);
+  4  COMMIT;
+  5  DBMS_OUTPUT.PUT_LINE('8% INTEREST ADDED TO ALL ACCOUNTS.');
+  6  END;
+  7  /
+8% INTEREST ADDED TO ALL ACCOUNTS.
+
+PL/SQL procedure successfully completed.
